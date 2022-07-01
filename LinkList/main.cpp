@@ -14,7 +14,7 @@ int main()
 	myList.AddElement(5);
 	myList.AddElement(3);
 	myList.DebugLog();
-	myList.Insert(12,0);
+	myList.Remove(-2);
 	myList.DebugLog();
 	return 0;
 }

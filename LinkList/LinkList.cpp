@@ -113,7 +113,7 @@ class LinkList
 		void Insert(int value,int index=-1)
 		{
 			// count index from last
-			if(index == -1)
+			if(index == -1 || index == counter - 1)
 				AddElement(value);
 
 			if(index < 0)
@@ -136,4 +136,34 @@ class LinkList
 			currentNode->setNext(newNode);
 			newNode->setNext(nextNode);
 		}
+
+		void Remove(int index=-1)
+		{
+			// count index from last
+			if(index == -1 || index == counter-1)
+			{
+				tail = AtIndex(counter-2);
+				tail->setNext(nullptr);
+				counter -=1;
+				return;
+			}
+
+			if(index < 0)
+				index = counter - index;
+						
+		
+			if(index == 0)
+			{
+				head = head->Next();
+				counter -=1;
+				return;
+			}
+			
+			Node *beforNodeCurrent = AtIndex(index - 1);
+			Node *afterNodeCurrent = AtIndex(index + 1);
+			beforNodeCurrent->setNext(afterNodeCurrent);
+			counter -=1;
+		}
+	
+
 };
