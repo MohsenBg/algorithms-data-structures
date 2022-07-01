@@ -110,14 +110,34 @@ class LinkList
 			return nullptr;
 		}
 
+		void ChangeValue(int index,int value)
+		{
+			if(index < 0)
+				index = counter + index;
+			
+			Node *currentNode;
+			
+			if(index == counter -1)
+				currentNode = tail;
+
+			else if(index == 0)
+				currentNode = head;
+			
+			else
+				currentNode = AtIndex(index);
+			
+			currentNode->value = value;
+		}
+
 		void Insert(int value,int index=-1)
 		{
-			// count index from last
-			if(index == -1 || index == counter - 1)
-				AddElement(value);
-
+			
 			if(index < 0)
-				index = counter - index;
+				index = counter + index;
+	
+			// count index from last
+			if(index == counter - 1)
+				AddElement(value);
 	
 			Node *newNode = new Node(value);
 		
@@ -139,8 +159,12 @@ class LinkList
 
 		void Remove(int index=-1)
 		{
+		
+			if(index < 0)
+				index = counter + index;
+		
 			// count index from last
-			if(index == -1 || index == counter-1)
+			if(index == counter - 1 )
 			{
 				tail = AtIndex(counter-2);
 				tail->setNext(nullptr);
@@ -148,10 +172,7 @@ class LinkList
 				return;
 			}
 
-			if(index < 0)
-				index = counter - index;
-						
-		
+								
 			if(index == 0)
 			{
 				head = head->Next();

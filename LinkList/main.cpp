@@ -16,5 +16,7 @@ int main()
 	myList.DebugLog();
 	myList.Remove(-2);
 	myList.DebugLog();
+	myList.ChangeValue(-3,10);
+	myList.DebugLog();
 	return 0;
 }
