@@ -13,6 +13,8 @@ int main()
 	myList.AddElement(4);
 	myList.AddElement(5);
 	myList.AddElement(3);
-	cout << myList.GetValues()[myList.Count()-1] << endl;
+	myList.DebugLog();
+	myList.Insert(12,0);
+	myList.DebugLog();
 	return 0;
 }
