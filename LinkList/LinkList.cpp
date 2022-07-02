@@ -8,27 +8,40 @@ using namespace std;
 class LinkList
 {
 	private:
+		
 		//first Node
 		Node *head;
+		
 		//last Node
 		Node *tail;
+		
+		//number of Node
 		int counter = 0;
+	
 	public:
+	
+		// return number of Node exists in List 
 		int Count()
 		{
 			return counter;
 		}
 		
+		
+		// return fist Node(Head) in List
 		Node begin()
 		{
 			return *head;
 		}
 
+		
+		// return last Node(tail) in List
 		Node end()
 		{
 			return *tail;
 		}
 
+		
+		// Print all Element of List , example => [1,2,3,...]
 		void DebugLog()
 		{
 			Node *currentNode = head;
@@ -49,6 +62,8 @@ class LinkList
 			cout << data << endl;
 		}
 
+		
+		// Add new Values(Node) end of the List same as Insert with Defult index
 		void AddElement(int value)
 		{
 			
@@ -67,7 +82,7 @@ class LinkList
 			counter += 1; 
 		}
 
-		// store All value in Array
+		// return vector (similar to array) All value(Not Node) in List
 		vector<int> GetValues()
 		{
 			vector<int> Values;
@@ -83,19 +98,38 @@ class LinkList
 			return Values;
 		}
 	
-		// find node with value if not find it return nullptr
-		Node *Find(int val)
+		
+		// If value exsits in List return index of the value otherwise return -1
+		int Find(int value)
+		{
+			Node *currentNode  = head;
+			int c=0;
+			while(currentNode != nullptr)
+			{
+				if(currentNode->value == value)
+					return  c;
+				currentNode = currentNode->Next();
+				c++;
+			}
+			return -1;
+		}
+		
+		
+		// If value exists in List return true otherwise return false
+		bool InList(int value)
 		{
 			Node *currentNode  = head;
 			while(currentNode != nullptr)
 			{
-				if(currentNode->value == val)
-					return  currentNode;
+				if(currentNode->value == value)
+					return  true;
 				currentNode = currentNode->Next();
 			}
-			return nullptr;
+			return false;
 		}
-		
+
+
+		// Find Node by the index
 		Node *AtIndex(int index)
 		{
 			if(index < 0)
@@ -112,6 +146,8 @@ class LinkList
 			return nullptr;
 		}
 
+		
+		// Change Value of a Node by index 
 		void ChangeValue(int value,int index)
 		{
 			if(index < 0)
@@ -131,6 +167,8 @@ class LinkList
 			currentNode->value = value;
 		}
 
+
+		// Insert new Value(Node) in List by index. Defult add end of the list
 		void Insert(int value,int index=-1)
 		{
 			
@@ -162,6 +200,8 @@ class LinkList
 			counter +=1;
 		}
 
+		
+		// Remove A node from List by the index. Defult Remove last Node
 		void Remove(int index=-1)
 		{
 		
@@ -191,6 +231,8 @@ class LinkList
 			counter -=1;
 		}
 	
+		
+		// Reverce all Node in List
 		void Reverce()
 		{
 			Node *currentNode = head;

@@ -3,6 +3,7 @@
 #include <vector>
 using namespace std;
 
+// print "\n\n------------------\n"
 void AddLine();
 
 int main()
@@ -21,6 +22,7 @@ int main()
 	cout << "Remove(-2)" << endl;
 	myList.Remove(-2);
 	myList.DebugLog();
+
 
 	cout << "Remove()" <<endl;
 	myList.Remove();
@@ -56,6 +58,9 @@ int main()
 	myList.ChangeValue(85,0);
 	myList.DebugLog();
 
+
+	cout << "Find()" << endl;
+	cout << myList.Find(85) <<endl;
 
 	AddLine();
 	cout << "Count(): " << myList.Count() << endl;
