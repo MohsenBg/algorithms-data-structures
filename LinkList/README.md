@@ -35,13 +35,13 @@
 |:------------|:--------------|:-----------------------------|:----------------|:----------------------------------------------------------------------|
 |  AddElement |	    Public    |        int value             |     ptr Node    | Add new Values(Node) end of the List same as Insert with Defult index |
 |   AtIndex   |     Public    |        int value             |     ptr Node    | Find Node by the index							    		                           |
-| ChangeValue |     Public    |   int value , int index      |	      void     | Change Value of a Node by index									                     |
+| ChangeValue |     Public    |   int value <br /> int index |	      void     | Change Value of a Node by index									                     |
 |    Count    |     Public    |	           -                 |	      int      | return number of Node exists in List								                	 |
 |  DebugLog   |     Public    |	           -                 |	      void     | Print all Element of List , example => [1,2,3,...]				          	 |
 |	 Find       |     Public    |	        int value            |	      int      | If value exsits in List return index of the value otherwise return -1 |
 |  GetValues  |     Public    |	           -                 |      vector     | return vector (similar to array) All value(Not Node) in List			     |
 |   InList    |     Public    |	        int value            |	      bool     | If value exists in List return true otherwise return false			       |
-|   Insert    |     Public    |  int value , int index=-1    |	      void     | Insert new Value(Node) in List by index. Defult add end of the list   |
+|   Insert    |     Public    | int value <br /> int index=-1|	      void     | Insert new Value(Node) in List by index. Defult add end of the list   |
 |   Remove    |     Public    |	      int index=-1           |	      void     | Remove A node from List by the index. Defult Remove last Node		   	 |
 |   Reverce   |     Public    |	             -               |	      void     | Reverce all Node in List											                      	 |
 |    begin    |     Public    |	             -               |	    ptr Node   | return fist Node(Head) in List									                    	 |
