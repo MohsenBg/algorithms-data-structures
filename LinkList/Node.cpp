@@ -12,7 +12,6 @@ class Node
 
 	void setNext(Node *node)
 	{
-		delete  next;
 		next  = node;
 	}
 

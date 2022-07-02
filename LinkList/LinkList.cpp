@@ -98,9 +98,11 @@ class LinkList
 		
 		Node *AtIndex(int index)
 		{
+			if(index < 0)
+				index = counter + index;
 			Node *currentNode  = head;
-			int c=0;
-			while(c<= index)
+			int c = 0 ;
+			while(c <= index)
 			{
 				if(c == index)
 					return currentNode;
@@ -110,14 +112,14 @@ class LinkList
 			return nullptr;
 		}
 
-		void ChangeValue(int index,int value)
+		void ChangeValue(int value,int index)
 		{
 			if(index < 0)
 				index = counter + index;
 			
 			Node *currentNode;
 			
-			if(index == counter -1)
+			if(index == counter - 1)
 				currentNode = tail;
 
 			else if(index == 0)
@@ -125,7 +127,7 @@ class LinkList
 			
 			else
 				currentNode = AtIndex(index);
-			
+		
 			currentNode->value = value;
 		}
 
@@ -136,9 +138,11 @@ class LinkList
 				index = counter + index;
 	
 			// count index from last
-			if(index == counter - 1)
+			if(index == counter - 1){
 				AddElement(value);
-	
+				return;
+			}
+
 			Node *newNode = new Node(value);
 		
 			Node *currentNode;
@@ -155,6 +159,7 @@ class LinkList
 			Node  *nextNode = currentNode->Next();
 			currentNode->setNext(newNode);
 			newNode->setNext(nextNode);
+			counter +=1;
 		}
 
 		void Remove(int index=-1)
@@ -186,5 +191,19 @@ class LinkList
 			counter -=1;
 		}
 	
-
+		void Reverce()
+		{
+			Node *currentNode = head;
+			Node *prevNode = nullptr;
+			Node *next = nullptr;
+			while(currentNode != nullptr)
+			{
+				Node *next = currentNode->Next();
+				currentNode->setNext(prevNode);
+				prevNode = currentNode;
+				currentNode = next;
+			}
+			tail = head;
+			head = prevNode;
+		}
 };
