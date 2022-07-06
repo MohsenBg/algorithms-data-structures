@@ -1,17 +1,20 @@
+#ifndef NODE_CPP
+#define NODE_CPP
+
+#include <vector>
 #include <iostream>
 #include <string>
-#include <vector>
 using namespace std;
 
 class Node
 {
 	private:
-	vector<Node> neighbors;
+	vector<Node*> neighbors;
 
 	bool IsNeighborsExist (Node node)
 	{	
-		for(Node neighbor:neighbors)
-			if(neighbor.name == node.name)
+		for(Node *neighbor:neighbors)
+			if(neighbor->name == node.name)
 				return true;
 		return false;
 	}
@@ -25,10 +28,15 @@ class Node
 		name = Name;	
 	}
 
-	void AddNeighbors(Node node)
+	void AddNeighbors(Node *node)
 	{
-		if(!IsNeighborsExist(node))
+		if(!IsNeighborsExist(*node))
 			neighbors.push_back(node);	
+	}
+
+	vector<Node*> GetNeighbor()
+	{
+		return neighbors;
 	}
 
 	void DebugLog()
@@ -36,8 +44,8 @@ class Node
 	
 		string show = "["+ name +"]: {";
 		
-		for(Node neighbor:neighbors)
-			show += neighbor.name + ",";
+		for(Node *neighbor:neighbors)
+			show += neighbor->name + ",";
 		
 		if(neighbors.size() > 0)
 			show.pop_back();
@@ -47,3 +55,6 @@ class Node
 		cout << show << endl;
 	}
 };
+
+#endif 
+

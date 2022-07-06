@@ -1,7 +1,7 @@
 #include "Graph.cpp"
+#include "Search.cpp"
 #include <iostream>
 using namespace std;
-
 
 int main()
 {
@@ -14,8 +14,13 @@ int main()
 	myGraph.AddEage("C","B");
 
 	myGraph.DebugLog();
-
-
+	
+	Node Start = *(myGraph.GetNode("A"));
+	
+	Search::DFS(Start);
+	cout << "----------------\n" <<endl;
+	Search::BFS(Start);
+	
 	return 0;
 }
 
