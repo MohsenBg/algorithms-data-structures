@@ -2,6 +2,7 @@
 #define GRAP_CPP
 
 #include <iostream>
+#include <memory>
 #include <string>
 #include <vector>
 #include <map>
@@ -12,15 +13,15 @@ enum PATH  {SINGEL , DOUBLE};
 class Graph
 {
 	private:
-	map<string,Node*> nodes;
+	map<string,shared_ptr<Node>> nodes;
 	
-	Node *FindNode(string name)
+	shared_ptr<Node> FindNode(string name)
 	{
 		if(nodes.count(name) == 1)
 			return nodes[name];
 
 
-		nodes[name] = new Node(name); 
+		nodes[name] = shared_ptr<Node>(new Node(name)); 
 		return  nodes[name];
 	}
 	
@@ -28,8 +29,8 @@ class Graph
 	public:
 	void AddEage(string from , string to,PATH path=SINGEL)
 	{
-		Node *From = FindNode(from);
-		Node *To = FindNode(to);	
+		shared_ptr<Node> From = FindNode(from);
+		shared_ptr<Node> To = FindNode(to);	
 		From->AddNeighbors(To);
 		if(path == DOUBLE)
 			To->AddNeighbors(From);
@@ -43,7 +44,7 @@ class Graph
 		
 	}
 
-	Node *GetNode(string name)
+	shared_ptr<Node> GetNode(string name)
 	{
 		return nodes[name];
 	}

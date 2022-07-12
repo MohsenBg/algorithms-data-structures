@@ -1,6 +1,7 @@
 #ifndef NODE_CPP
 #define NODE_CPP
 
+#include <memory>
 #include <vector>
 #include <iostream>
 #include <string>
@@ -9,12 +10,12 @@ using namespace std;
 class Node
 {
 	private:
-	vector<Node*> neighbors;
+	vector<shared_ptr<Node>> neighbors;
 
-	bool IsNeighborsExist (Node node)
+	bool IsNeighborsExist (shared_ptr<Node> node)
 	{	
-		for(Node *neighbor:neighbors)
-			if(neighbor->name == node.name)
+		for(shared_ptr<Node>neighbor:neighbors)
+			if(neighbor->name == node->name)
 				return true;
 		return false;
 	}
@@ -28,13 +29,13 @@ class Node
 		name = Name;	
 	}
 
-	void AddNeighbors(Node *node)
+	void AddNeighbors(shared_ptr<Node> node)
 	{
-		if(!IsNeighborsExist(*node))
+		if(!IsNeighborsExist(node))
 			neighbors.push_back(node);	
 	}
 
-	vector<Node*> GetNeighbor()
+	vector<shared_ptr<Node>> GetNeighbor()
 	{
 		return neighbors;
 	}
@@ -44,7 +45,7 @@ class Node
 	
 		string show = "["+ name +"]: {";
 		
-		for(Node *neighbor:neighbors)
+		for(shared_ptr<Node>neighbor:neighbors)
 			show += neighbor->name + ",";
 		
 		if(neighbors.size() > 0)
