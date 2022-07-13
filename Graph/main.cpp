@@ -18,10 +18,12 @@ int main()
 
 	myGraph.DebugLog();
 
+	cout << "----------------------------\n";
 	cout << "Breadth Fist Search \n";
 	vector<string>path = Search::BFS(myGraph.GetNode("A"), myGraph.GetNode("C"));
 	printPath(path);
 	
+	cout << "----------------------------\n";
 	cout << "Depth Fist Search \n";
 	path = Search::DFS(myGraph.GetNode("A"), myGraph.GetNode("C"));
 	printPath(path);
