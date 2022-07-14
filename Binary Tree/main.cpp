@@ -1,4 +1,4 @@
-#include "Node.cpp"
+#include "Tree.cpp"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -8,15 +8,20 @@ void printVector(vector<string> vec);
 int main()
 {
 
+	TreeNode A = TreeNode("A",5);
+	TreeNode B = TreeNode("B",3);
+	TreeNode C = TreeNode("C",5);
+	TreeNode D = TreeNode("D",4);
+	TreeNode E = TreeNode("E",2);
 	
-	shared_ptr<Node> A = shared_ptr<Node>(new Node(5));
-	shared_ptr<Node> B = shared_ptr<Node>(new Node(3));
-	shared_ptr<Node> C = shared_ptr<Node>(new Node(1));
-	A->SetLeftNode(B);
-	A->SetRightNode(C);
-	A->DebugLog();
-	shared_ptr<Node> D = shared_ptr<Node>(new Node(-2));
-	D->DebugLog();
+	Tree myTree = Tree(A);		
+	myTree.AddBothNode(A.id, B, C);
+	myTree.AddLeftNode(C.id, D);
+	myTree.AddRightNode(D.id,E);
+	
+	shared_ptr<Node> nodeC = myTree.FindNodeWithId(C.id);
+	nodeC->DebugLog();
+	printVector(myTree.FindNodeWithValue(5));
 	return 0;
 }
 
@@ -33,3 +38,14 @@ void printVector(vector<string> vec)
 		
 		cout << show << endl;
 }
+
+//            (A)
+//            / \
+//           /	 \
+//         (B)   (C)
+//				 /
+//				/
+//			  (D)
+//				\
+//				 \
+//				 (E)
