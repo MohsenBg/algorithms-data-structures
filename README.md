@@ -5,5 +5,6 @@ I wrote these codes according to my personal taste and the information I learned
 
 ## Data structures
 * Link List
-* Graph
+* Graph (BFS & DFS)
 * Binary Tree
+
