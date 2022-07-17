@@ -3,13 +3,57 @@
 
 void printArray(int *array,int size);
 void PrintLine();
+void RandomArray(int * array, int size);
 
 int main()
 {
-	int myArray[10] = {19, 10, 8, 17, 9, 15, 12, 47, 52, 36};
-	Sorting::BubbleSort(myArray,10);
-	printArray(myArray, 10);
+	srand((unsigned)time(NULL));
+
+	const int sizeArray = 10;
+	int myArray[sizeArray];
+	
+	
+	cout << "------------------------------------\n";
+	cout << "BubbleSort" <<endl;
+	RandomArray(myArray,sizeArray);
+	cout << "Befor:"<< endl;
+	printArray(myArray,sizeArray);
+	
+	cout << "After:"<< endl;
+	Sorting::BubbleSort(myArray,sizeArray);
+	printArray(myArray, sizeArray);
+	
+
+	cout << "------------------------------------\n";
+	cout << "QuickSort" << endl;
+	RandomArray(myArray,sizeArray);
+	cout << "Befor:"<< endl;
+	printArray(myArray,sizeArray);
+	
+	cout << "After:"<< endl;
+	Sorting::QuickSort(myArray,sizeArray - 1);
+	printArray(myArray, sizeArray);
+
+
+	cout << "------------------------------------\n";
+	cout << "MargeSort" << endl;
+	RandomArray(myArray,sizeArray);
+	cout << "Befor:"<< endl;
+	printArray(myArray,sizeArray);
+	
+	cout << "After:"<< endl;
+	Sorting::MargeSort(myArray,sizeArray);
+	printArray(myArray, sizeArray);
+	
 	return 0;
+}
+
+void RandomArray(int * array , int size)
+{
+	for(int i = 0; i < size ; i++)
+	{
+		array[i] = rand()%100 ;
+	}	
 }
 
 void printArray(int *array,int size)

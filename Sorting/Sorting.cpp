@@ -6,54 +6,124 @@ using namespace std;
 
 class Sorting
 {
-	public:
-	static void BubbleSort(int *array,int size)
-	{
-		for(int i = 0; i < size ; i++)
-		{	
-			bool isSwapped = false;
-
-			for(int j = 0; j< size-i-1 ; j++)
-			{
-				if(array[j] > array[j+1])
-				{
-					swap(array[j],array[j+1]);
-					isSwapped = true;
-				}
-			}
-
-			if(!isSwapped)
-				break;
-		}
-	}
-
-	static void QuickSort(int * array,int low,int high)
-	{
-		int mid = (low+high)/2;
-		int pivot = array[mid];
-		
-		int i = low;
-		int j = high;
-
-		while(j > i)
+	private:
+	
+		static int Partition(int * array , int high,  int low)
 		{
-			if(array[i] <= pivot)
+			int povit = array[low];
+			int lp = low ;
+			int rp = high; 
+			while(lp < rp)
 			{
-				while(array[j] > pivot && j > i)
-					j--;
+				//cout << "lp:" << lp << "rp:" << rp << endl;
+				while(povit >= array[lp])
+					lp++;
 			
-				if(j > i)
-					swap(array[i],array[j]);
-				else
-					swap(pivot,array[j]);
-			}
-			i++;
-		}
-		if(low < high)
-		{
-			QuickSort(array,low,j);	
-			QuickSort(array,j+1,high);
-		};
-	}
+				while(povit < array[rp])
+					rp--;
+			
+				if(lp < rp)
+					swap(array[lp],array[rp]);
+			}	
 
+			swap(array[rp],array[low]);
+	
+			return rp;
+		}
+
+
+		static	void Marge(int* array,int *leftSide,int sizeLeft,int* rightSide,int sizeRight)
+		{
+			int i = 0, j = 0, k = 0; 
+				
+			while(i < sizeLeft && j < sizeRight)
+			{
+				if(leftSide[i] < rightSide[j])
+				{
+					array[k] = leftSide[i];
+					i++;
+				}
+				
+				else
+				{
+					array[k] = rightSide[j];
+					j++;
+				}
+			
+				k++;
+			}
+
+
+			for(; i < sizeLeft; i++){
+
+				array[k] = leftSide[i];
+				k++;
+			}
+	
+			
+			for(; j < sizeRight; j++)
+			{
+				array[k] = rightSide[j];
+				k++;
+			}
+					
+		}	
+	
+
+	public:
+		static void BubbleSort(int *array,int size)
+		{
+			for(int i = 0; i < size ; i++)
+			{	
+				bool isSwapped = false;
+
+				for(int j = 0; j< size-i-1 ; j++)
+				{
+					if(array[j] > array[j+1])
+					{
+						swap(array[j],array[j+1]);
+						isSwapped = true;
+					}
+				}	
+
+				if(!isSwapped)
+					break;
+			}
+		}
+
+		static void QuickSort(int * array, int high, int low = 0)
+		{
+				
+			if(high > low)
+			{
+				int rp = Partition(array,high,low);
+				QuickSort(array,rp-1,low);
+				QuickSort(array,high,rp+1);
+			}
+
+		}
+
+		static void MargeSort(int *array, int size)
+		{
+			if(size < 2)
+				return;
+	
+			int mid = size/2;
+	
+			int *leftSide = new int[mid]; 
+			int *rightSide = new int[size-mid]; 
+		
+			for(int i = 0; i < mid ; i++)
+				leftSide[i] = array[i];
+		
+			for(int i=mid; i<size; i++)
+				rightSide[i-mid] = array[i];
+		
+			MargeSort(leftSide,mid);
+			MargeSort(rightSide,size-mid);
+			Marge(array,leftSide, mid,rightSide,size-mid);
+
+			delete[] leftSide;
+			delete[] rightSide;
+		}
 };
