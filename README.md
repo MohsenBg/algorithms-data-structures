@@ -7,5 +7,5 @@ I wrote these codes according to my personal taste and the information I learned
 * Link List
 * Graph ( BFS & DFS )
 * Binary Tree
-* Sorting ( Bubble , Selection , Insertion , Marge , Quick )
+* Sorting ( Buble , Selection , Insertion , Marge , Quick )
 
