@@ -6,6 +6,6 @@ I wrote these codes according to my personal taste and the information I learned
 ## Content
 * Link List
 * Graph ( BFS & DFS )
-* Binary Tree
+* Binary Tree ( BFS & DFS )
 * Sorting ( Bubble , Selection , Insertion , Marge , Quick )
 
