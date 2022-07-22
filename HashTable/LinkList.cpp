@@ -1,27 +1,39 @@
 #ifndef LINK_LIST_CPP
 #define LINK_LIST_CPP
+#include "IdHandler.cpp"
 #include "Node.cpp"
 #include <iostream>
 #include <memory>
-
 template <typename T> class LinkList {
 private:
   shared_ptr<Node<T>> head;
   shared_ptr<Node<T>> tail;
   int count = 0;
+  IdHandler idHandler;
 
 public:
-  void AddNode(T value) {
+  void AddNode(string id, T value) {
     if (tail == nullptr) {
-      shared_ptr<Node<T>> node = shared_ptr<Node<T>>(new Node<T>(value));
+      shared_ptr<Node<T>> node = shared_ptr<Node<T>>(new Node<T>(id, value));
       head = node;
       tail = node;
     } else {
-      shared_ptr<Node<T>> node = shared_ptr<Node<T>>(new Node<T>(value));
+      shared_ptr<Node<T>> node = shared_ptr<Node<T>>(new Node<T>(id, value));
       tail->SetNext(node);
       tail = node;
     }
+    idHandler.AddId(id);
     count++;
+  }
+
+  shared_ptr<Node<T>> FindNodeWithId(string id) {
+    shared_ptr<Node<T>> currentNode = head;
+    while (currentNode != nullptr) {
+      if (currentNode->GetId() == id)
+        return currentNode;
+      currentNode = currentNode->GetNext();
+    }
+    return nullptr;
   }
 
   shared_ptr<Node<T>> FindNodeWithIndex(int index) {
@@ -46,7 +58,7 @@ public:
     return nullptr;
   }
 
-  void Insert(T value, int index = -1) {
+  void Insert(string id, T value, int index = -1) {
 
     if (index < 0)
       index = count - index;
@@ -74,6 +86,7 @@ public:
       node->SetNext(currentNode);
     }
 
+    idHandler.AddId(id);
     count++;
   }
 
@@ -97,6 +110,7 @@ public:
     } else {
       parentNode->SetNext(currentNode->GetNext());
     }
+    idHandler.RemoveId(currentNode->GetId());
     count--;
   }
 
