@@ -1,29 +1,29 @@
+#ifndef NODE_CPP
+#define NODE_CPP
+#include <iostream>
+#include <memory>
+using namespace std;
 
+template <typename T>
 
-class Node
-{
-	public:
-	int value;
-	
-	Node(int Value)
-	{
-		value = Value;
-	}
+class Node {
 
-	void setNext(Node *node)
-	{
-		next  = node;
-	}
+private:
+  shared_ptr<Node<T>> next;
 
-	Node *Next()
-	{
-		
-		if(next == nullptr)
-			return nullptr;
+public:
+  T value;
+  Node(int Value) { value = Value; }
 
-		return next;
-	}
+  void setNext(shared_ptr<Node<T>> node) { next = node; }
 
-	private:
-		Node *next;
+  shared_ptr<Node<T>> Next() {
+
+    if (next == nullptr)
+      return nullptr;
+
+    return next;
+  }
 };
+
+#endif
