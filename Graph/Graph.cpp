@@ -1,53 +1,53 @@
 #ifndef GRAP_CPP
 #define GRAP_CPP
 
+#include "Node.cpp"
 #include <iostream>
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
-#include <map>
-#include "Node.cpp"
 using namespace std;
 
-enum PATH  {SINGEL , DOUBLE};
-class Graph
-{
-	private:
-	map<string,shared_ptr<Node>> nodes;
-	
-	shared_ptr<Node> FindNode(string name)
-	{
-		if(nodes.count(name) == 1)
-			return nodes[name];
+enum PATH { SINGEL, DOUBLE };
 
+struct NodeData {
+  NodeData(string Name, Coord Postion = Coord(0, 0)) {
+    name = Name;
+    postion = Postion;
+  }
+  string name;
+  Coord postion = Coord(0, 0);
+};
 
-		nodes[name] = shared_ptr<Node>(new Node(name)); 
-		return  nodes[name];
-	}
-	
+class Graph {
+private:
+  map<string, shared_ptr<Node>> nodes;
 
-	public:
-	void AddEage(string from , string to,PATH path=SINGEL)
-	{
-		shared_ptr<Node> From = FindNode(from);
-		shared_ptr<Node> To = FindNode(to);	
-		From->AddNeighbors(To);
-		if(path == DOUBLE)
-			To->AddNeighbors(From);
-	}
+  shared_ptr<Node> FindNode(NodeData node) {
+    if (nodes.count(node.name) > 0)
+      return nodes[node.name];
 
-	void DebugLog()
-	{
-		
-		for(auto it = nodes.begin(); it != nodes.end(); it++)
-			it->second->DebugLog();
-		
-	}
+    nodes[node.name] = shared_ptr<Node>(new Node(node.name, node.postion));
+    return nodes[node.name];
+  }
 
-	shared_ptr<Node> GetNode(string name)
-	{
-		return nodes[name];
-	}
+public:
+  void AddEage(NodeData from, NodeData to, PATH path = SINGEL) {
+    shared_ptr<Node> From = FindNode(from);
+    shared_ptr<Node> To = FindNode(to);
+    From->AddNeighbors(To);
+    if (path == DOUBLE)
+      To->AddNeighbors(From);
+  }
+
+  void DebugLog() {
+
+    for (auto it = nodes.begin(); it != nodes.end(); it++)
+      it->second->DebugLog();
+  }
+
+  shared_ptr<Node> GetNode(string name) { return nodes[name]; }
 };
 
 #endif
