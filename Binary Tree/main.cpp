@@ -112,9 +112,9 @@ template <typename T> void printVectorNode(vector<shared_ptr<Node<T>>> vec) {
 //            / \
 //           /	 \
 //         (B)   (C)
-//				 /
-//				/
-//			  (D)
-//				\
-//				 \
-//				 (E)
+//               /
+//              /
+//            (D)
+//              \
+//               \
+//               (E)
