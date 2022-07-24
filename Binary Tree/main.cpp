@@ -108,8 +108,8 @@ template <typename T> void printVectorNode(vector<shared_ptr<Node<T>>> vec) {
 
 // Tree Patern
 //
-//             (A)
-//               / \
+//            (A)
+//            / \
 //           /	 \
 //         (B)   (C)
 //				 /
