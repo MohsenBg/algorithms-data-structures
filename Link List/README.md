@@ -15,7 +15,7 @@
 | :------ | :------------ | :------------------- | :------------------- | :---------------------------- |
 | Next    | Public        | -                    | shared_ptr<Node\<T>> | Return Next Node              |
 | Node    | Public        | T value              | void                 | Constructor Node              |
-| setNext | Public        | shared_ptr<Node\<T>> | void                 | change next(private) Variable |
+| setNext | Public        | shared_ptr<Node\<T>> | void                 | Change next(private) Variable |
 
 ## Class LinkList
 
@@ -23,9 +23,9 @@
 
 | Name    | Type                 | Accessibility | Description    |
 | :------ | :------------------- | :------------ | :------------- |
-| counter | int                  | Private       | number of Node |
-| head    | shared_ptr<Node\<T>> | Private       | first Node     |
-| tail    | shared_ptr<Node\<T>> | Private       | last Node      |
+| counter | int                  | Private       | Number of Node |
+| head    | shared_ptr<Node\<T>> | Private       | First Node     |
+| tail    | shared_ptr<Node\<T>> | Private       | Last Node      |
 
 ### Functions
 
@@ -34,7 +34,7 @@
 | AddElement  | Public        | T value                     | shared_ptr<Node\<T>> | Add new Values(Node) end of the List same as Insert with Defult index |
 | AtIndex     | Public        | T value                     | shared_ptr<Node\<T>> | Find Node by the index                                                |
 | ChangeValue | Public        | T value <br /> int index    | void                 | Change Value of a Node by index                                       |
-| Count       | Public        | -                           | int                  | return number of Node exists in List                                  |
+| Count       | Public        | -                           | int                  | Return number of Node exists in List                                  |
 | DebugLog    | Public        | -                           | void                 | Print all Element of List , example => [1,2,3,...]                    |
 | Find        | Public        | T value                     | int                  | If value exsits in List return index of the value otherwise return -1 |
 | GetValues   | Public        | -                           | vector<T>            | return vector (similar to array) All value(Not Node) in List          |
@@ -42,5 +42,5 @@
 | Insert      | Public        | T value <br /> int index=-1 | void                 | Insert new Value(Node) in List by index. Defult add end of the list   |
 | Remove      | Public        | int index=-1                | void                 | Remove A node from List by the index. Defult Remove last Node         |
 | Reverce     | Public        | -                           | void                 | Reverce all Node in List                                              |
-| begin       | Public        | -                           | shared_ptr<Node\<T>> | return fist Node(Head) in List                                        |
-| end         | Public        | -                           | shared_ptr<Node\<T>> | return last Node(tail) in List                                        |
+| begin       | Public        | -                           | shared_ptr<Node\<T>> | Return fist Node(Head) in List                                        |
+| end         | Public        | -                           | shared_ptr<Node\<T>> | Return last Node(tail) in List                                        |
