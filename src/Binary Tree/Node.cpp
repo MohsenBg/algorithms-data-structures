@@ -1,11 +1,11 @@
 #ifndef NODE_CPP
 #define NODE_CPP
-
 #include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
-using namespace std;
+
+    using namespace std;
 
 class ID {
 private:
