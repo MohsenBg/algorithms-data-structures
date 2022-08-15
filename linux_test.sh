@@ -6,13 +6,13 @@ TEST_LEN=${#TEST_TYPE[@]}
 
 if [ $count_arg -lt 1 ]
   then
-      echo -e "   code\t |   Description"
+      echo -e " number\t |   Description"
       echo "----------------------------"
       for ((i = 0; i < $TEST_LEN; i++)); do 
           echo -e "    $i \t |   ${TEST_TYPE[$i]}"
       done
 
-      printf "\nchoose Type_code:"
+      printf "\nchoose test number:"
       read type
     else
       type=$1
@@ -24,21 +24,20 @@ fi
 fi
 
 if [ $type -gt $TEST_LEN ] || [ $type -lt 0 ];then
-    echo "invalid Test number"
+    echo "invalid test number"
     exit 2
 fi
 
 currentType=${TEST_TYPE[$type]}
 
 if [ "$currentType" == "${TEST_TYPE[0]}" ];then
-  echo ${TEST_TYPE[0]}
+  cargo test -- --test-threads=1
 
 elif [ "$currentType" == "${TEST_TYPE[1]}" ];then
   echo ${TEST_TYPE[1]}
 
 elif [ "$currentType" == "${TEST_TYPE[2]}" ];then
-  echo ${TEST_TYPE[2]}
-
+   cargo test graph -- --test-threads=1 
 elif [ "$currentType" == "${TEST_TYPE[3]}" ];then
   echo ${TEST_TYPE[3]}
 
