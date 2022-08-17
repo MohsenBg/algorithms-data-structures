@@ -15,6 +15,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          junit_files: 'test-results/junit/**/*.xml'
+          nunit_files: 'test-results/nunit/**/*.xml'
+          xunit_files: 'test-results/xunit/**/*.xml'
+          trx_files: 'test-results/**/*.trx'
+
       - name: Build
         run: cargo build --verbose
 
@@ -26,12 +36,3 @@ jobs:
 
       - name: Run Sorting Test
         run: cargo test --verbose sort -- --test-threads=1
-
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          junit_files: 'test-results/junit/**/*.xml'
-          nunit_files: 'test-results/nunit/**/*.xml'
-          xunit_files: 'test-results/xunit/**/*.xml'
-          trx_files: 'test-results/**/*.trx'
