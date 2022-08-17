@@ -1,4 +1,4 @@
-name: build_&_test
+name: Build_&_Test
 
 on:
   push:
@@ -14,14 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          junit_files: 'test-results/junit/**/*.xml'
-          nunit_files: 'test-results/nunit/**/*.xml'
-          xunit_files: 'test-results/xunit/**/*.xml'
-          trx_files: 'test-results/**/*.trx'
+      - uses: actions/checkout@v3
 
       - name: Build
         run: cargo build --verbose
