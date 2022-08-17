@@ -2,21 +2,27 @@ name: build_&_test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose -- --test-threads=1
+      - uses: actions/checkout@v3
+      - name: Build
+        run: cargo build --verbose
+
+      - name: Run Graph Test
+        run: cargo test --verbose graph -- --test-threads=1
+
+      - name: Run Link List Test
+        run: cargo test --verbose link_list -- --test-threads=1
+
+      - name: Run Sorting Test
+        run: cargo test --verbose sort -- --test-threads=1
