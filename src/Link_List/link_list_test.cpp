@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
   // InList
   else if (flag == "--IL") {
     for (int value : arg_numbers) {
-      cout << boolalpha << my_linklist.InList(value) << " ";
+      cout << my_linklist.InList(value) << " ";
     }
     cout << " \n";
   }
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
                                            : arg_numbers.size() - 1;
 
     for (int i = 0; i < lens - 1; i += 2) {
-      my_linklist.Insert(arg_numbers[i], arg_numbers[i + 1]);
+      my_linklist.Insert(arg_numbers[i + 1], arg_numbers[i]);
     }
 
     if (arg_numbers.size() - lens == 1)
@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
                                            : arg_numbers.size() - 1;
 
     for (int i = 0; i < lens - 1; i += 2) {
-      my_linklist.ChangeValue(arg_numbers[i], arg_numbers[i + 1]);
+      my_linklist.ChangeValue(arg_numbers[i + 1], arg_numbers[i]);
     }
 
     print_vec(my_linklist.GetValues());

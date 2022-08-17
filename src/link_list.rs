@@ -71,39 +71,127 @@ mod link_list {
     #[derive(Debug)]
     struct _Result {
         input: Vec<i32>,
+        flag_arg: Vec<i32>,
         output: Vec<i32>,
     }
     #[test]
-    fn get_value() {
+    fn link_list_get_value() {
         let _result = run_without_flag_arg(FLAGS.get_values);
         assert_eq!(_result.input, _result.output);
     }
 
     #[test]
-    fn begin() {
+    fn link_list_begin() {
         let _result = run_without_flag_arg(FLAGS.get_values);
         assert_eq!(_result.input[0], _result.output[0]);
     }
 
     #[test]
-    fn end() {
+    fn link_list_end() {
         let _result = run_without_flag_arg(FLAGS.end);
         println!("{:?}", _result);
         assert_eq!(_result.input.last(), _result.output.last());
     }
 
     #[test]
-    fn count() {
+    fn link_list_count() {
         let _result = run_without_flag_arg(FLAGS.count);
         assert_eq!(_result.input.len(), _result.output[0] as usize);
     }
 
     #[test]
-    fn reverce() {
+    fn link_list_reverce() {
         let mut _result = run_without_flag_arg(FLAGS.reverce);
         _result.input.reverse();
-        assert_eq!(_result.output, _result.output);
+        assert_eq!(_result.input, _result.output);
     }
+
+    #[test]
+    fn link_list_at_index() {
+        let _result = run_with_flag_arg(FLAGS.at_index);
+        let mut currect_output: Vec<i32> = Vec::new();
+        for number in _result.flag_arg {
+            let value = _result.input[number as usize];
+            currect_output.push(value);
+        }
+        assert_eq!(currect_output, _result.output);
+    }
+
+    #[test]
+    fn link_list_find() {
+        for _ in 0..10 {
+            let _result = run_with_flag_arg(FLAGS.find);
+            let mut currect_output: Vec<i32> = Vec::new();
+            for number in _result.flag_arg {
+                let index = find_postion_value(&_result.input, number);
+                currect_output.push(index);
+            }
+            assert_eq!(currect_output, _result.output);
+        }
+    }
+
+    #[test]
+    fn link_list_in_list() {
+        let _result = run_with_flag_arg(FLAGS.in_list);
+        let mut currect_output: Vec<i32> = Vec::new();
+        for value in _result.flag_arg {
+            let in_list = is_value_in_list(&_result.input, value);
+            currect_output.push(in_list);
+        }
+        assert_eq!(currect_output, _result.output);
+    }
+
+    #[test]
+    fn link_list_remove() {
+        let _result = run_with_flag_arg(FLAGS.remove);
+        let mut currect_output: Vec<i32> = _result.input.clone();
+        for index in _result.flag_arg.clone() {
+            currect_output.remove(index as usize);
+        }
+        assert_eq!(
+            currect_output, _result.output,
+            "\nflag_arg:{:?}\ninput:{:?}\n",
+            _result.flag_arg, _result.input
+        );
+    }
+
+    #[test]
+    fn link_list_insert() {
+        let _result = run_with_flag_arg(FLAGS.insert);
+        let mut currect_output: Vec<i32> = _result.input.clone();
+        let mut index: usize = 0;
+
+        while index < _result.flag_arg.len() {
+            currect_output.insert(
+                _result.flag_arg[index] as usize,
+                _result.flag_arg[index + 1],
+            );
+            index += 2;
+        }
+        assert_eq!(
+            currect_output, _result.output,
+            "\nflag_arg:{:?}\ninput:{:?}\n",
+            _result.flag_arg, _result.input
+        );
+    }
+
+    #[test]
+    fn link_list_change_value() {
+        let _result = run_with_flag_arg(FLAGS.change_value);
+        let mut currect_output: Vec<i32> = _result.input.clone();
+        let mut index: usize = 0;
+
+        while index < _result.flag_arg.len() {
+            currect_output[_result.flag_arg[index] as usize] = _result.flag_arg[index + 1];
+            index += 2;
+        }
+        assert_eq!(
+            currect_output, _result.output,
+            "\nflag_arg:{:?}\ninput:{:?}\n",
+            _result.flag_arg, _result.input
+        );
+    }
+
     fn run_without_flag_arg(flag: &str) -> _Result {
         let stup = stup_base_test(flag);
         let output = compile_cpp::run_commend(&stup.commend);
@@ -113,12 +201,31 @@ mod link_list {
         println!("{}", str_output);
         return _Result {
             input: stup.input,
+            flag_arg: Vec::new(),
             output: vec_output,
         };
     }
+
+    fn run_with_flag_arg(flag: &str) -> _Result {
+        let stup = stup_base_test(flag);
+        let flag_arg = genarte_rand_num_vec(10, 0, 10);
+        let str_flag_arg = convert_vec_to_str(&flag_arg);
+        let commend = format!("{} {}", stup.commend, str_flag_arg);
+        let output = compile_cpp::run_commend(&commend);
+        let output = test_file_executable(output);
+        let str_output = format!("{:?}", String::from_utf8(output.stdout));
+        let vec_output = convert_str_to_vec_int(&str_output);
+        println!("{}", str_output);
+        return _Result {
+            input: stup.input,
+            flag_arg,
+            output: vec_output,
+        };
+    }
+
     fn stup_base_test(flag: &str) -> Stup {
         let file_type = compile_cpp::get_output_file(PATH_OUTPUT);
-        let input = genarte_rand_num_vec(10, 0, 100); //(count,rang_start,range_end)
+        let input = genarte_rand_num_vec(25, 0, 35); //(count,rang_start,range_end)
         let str_input = convert_vec_to_str(&input);
         let commend = format!("{} {} {}", file_type, str_input, flag);
         return Stup { input, commend };
@@ -152,6 +259,15 @@ mod link_list {
         str
     }
 
+    fn is_value_in_list(vec: &[i32], value: i32) -> i32 {
+        for &number in vec {
+            if number == value {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
     fn convert_str_to_vec_int(string: &str) -> Vec<i32> {
         let mut numbers: Vec<i32> = Vec::new();
         let mut str_num = String::new();
@@ -170,5 +286,16 @@ mod link_list {
             }
         }
         numbers
+    }
+
+    fn find_postion_value(vec: &[i32], value: i32) -> i32 {
+        let mut index: usize = 0;
+        while index < vec.len() {
+            if vec[index] == value {
+                return index as i32;
+            }
+            index += 1;
+        }
+        return -1;
     }
 }

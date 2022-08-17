@@ -30,20 +30,27 @@ fi
 
 currentType=${TEST_TYPE[$type]}
 
+# All
 if [ "$currentType" == "${TEST_TYPE[0]}" ];then
   cargo test -- --test-threads=1
 
+# Binary Tree
 elif [ "$currentType" == "${TEST_TYPE[1]}" ];then
   echo ${TEST_TYPE[1]}
 
+# Graph
 elif [ "$currentType" == "${TEST_TYPE[2]}" ];then
    cargo test graph -- --test-threads=1 
-elif [ "$currentType" == "${TEST_TYPE[3]}" ];then
+# Hash Table
+ elif [ "$currentType" == "${TEST_TYPE[3]}" ];then
   echo ${TEST_TYPE[3]}
 
+# Link List
 elif [ "$currentType" == "${TEST_TYPE[4]}" ];then
-  echo ${TEST_TYPE[4]}
+   cargo test link_list -- --test-threads=1
+ 
 
+# Sort
 elif [ "$currentType" == "${TEST_TYPE[5]}" ];then
   cargo test sort -- --test-threads=1
 
