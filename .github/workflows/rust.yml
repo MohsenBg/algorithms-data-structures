@@ -31,6 +31,9 @@ jobs:
       - name: Run Graph Test
         run: cargo test --verbose graph -- --test-threads=1
 
+      - name: Run hash_table Test
+        run: cargo test --verbose hash_table -- --test-threads=1
+
       - name: Run Link List Test
         run: cargo test --verbose link_list -- --test-threads=1
 

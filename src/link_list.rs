@@ -109,47 +109,47 @@ mod link_list {
     #[test]
     fn link_list_at_index() {
         let _result = run_with_flag_arg(FLAGS.at_index);
-        let mut currect_output: Vec<i32> = Vec::new();
+        let mut correct_output: Vec<i32> = Vec::new();
         for number in _result.flag_arg {
             let value = _result.input[number as usize];
-            currect_output.push(value);
+            correct_output.push(value);
         }
-        assert_eq!(currect_output, _result.output);
+        assert_eq!(correct_output, _result.output);
     }
 
     #[test]
     fn link_list_find() {
         for _ in 0..10 {
             let _result = run_with_flag_arg(FLAGS.find);
-            let mut currect_output: Vec<i32> = Vec::new();
+            let mut correct_output: Vec<i32> = Vec::new();
             for number in _result.flag_arg {
                 let index = find_postion_value(&_result.input, number);
-                currect_output.push(index);
+                correct_output.push(index);
             }
-            assert_eq!(currect_output, _result.output);
+            assert_eq!(correct_output, _result.output);
         }
     }
 
     #[test]
     fn link_list_in_list() {
         let _result = run_with_flag_arg(FLAGS.in_list);
-        let mut currect_output: Vec<i32> = Vec::new();
+        let mut correct_output: Vec<i32> = Vec::new();
         for value in _result.flag_arg {
             let in_list = is_value_in_list(&_result.input, value);
-            currect_output.push(in_list);
+            correct_output.push(in_list);
         }
-        assert_eq!(currect_output, _result.output);
+        assert_eq!(correct_output, _result.output);
     }
 
     #[test]
     fn link_list_remove() {
         let _result = run_with_flag_arg(FLAGS.remove);
-        let mut currect_output: Vec<i32> = _result.input.clone();
+        let mut correct_output: Vec<i32> = _result.input.clone();
         for index in _result.flag_arg.clone() {
-            currect_output.remove(index as usize);
+            correct_output.remove(index as usize);
         }
         assert_eq!(
-            currect_output, _result.output,
+            correct_output, _result.output,
             "\nflag_arg:{:?}\ninput:{:?}\n",
             _result.flag_arg, _result.input
         );
@@ -158,18 +158,18 @@ mod link_list {
     #[test]
     fn link_list_insert() {
         let _result = run_with_flag_arg(FLAGS.insert);
-        let mut currect_output: Vec<i32> = _result.input.clone();
+        let mut correct_output: Vec<i32> = _result.input.clone();
         let mut index: usize = 0;
 
         while index < _result.flag_arg.len() {
-            currect_output.insert(
+            correct_output.insert(
                 _result.flag_arg[index] as usize,
                 _result.flag_arg[index + 1],
             );
             index += 2;
         }
         assert_eq!(
-            currect_output, _result.output,
+            correct_output, _result.output,
             "\nflag_arg:{:?}\ninput:{:?}\n",
             _result.flag_arg, _result.input
         );
@@ -178,15 +178,15 @@ mod link_list {
     #[test]
     fn link_list_change_value() {
         let _result = run_with_flag_arg(FLAGS.change_value);
-        let mut currect_output: Vec<i32> = _result.input.clone();
+        let mut correct_output: Vec<i32> = _result.input.clone();
         let mut index: usize = 0;
 
         while index < _result.flag_arg.len() {
-            currect_output[_result.flag_arg[index] as usize] = _result.flag_arg[index + 1];
+            correct_output[_result.flag_arg[index] as usize] = _result.flag_arg[index + 1];
             index += 2;
         }
         assert_eq!(
-            currect_output, _result.output,
+            correct_output, _result.output,
             "\nflag_arg:{:?}\ninput:{:?}\n",
             _result.flag_arg, _result.input
         );
