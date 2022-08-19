@@ -22,7 +22,7 @@ jobs:
       - name: Run Graph Test
         run: cargo test --verbose graph -- --test-threads=1
 
-      - name: Run hash_table Test
+      - name: Run Hash Table Test
         run: cargo test --verbose hash_table -- --test-threads=1
 
       - name: Run Link List Test
