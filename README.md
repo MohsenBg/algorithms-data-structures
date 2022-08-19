@@ -1,3 +1,4 @@
+[![Tests](https://github.com/MohsenBg/algorithms-data-structures/actions/workflows/rust.yml/badge.svg)](https://github.com/MohsenBg/algorithms-data-structures/actions/workflows/rust.yml)
 # Algorithms & Data structures
 Code example of the algorithm and data structure that I use.
 ## Attention 
